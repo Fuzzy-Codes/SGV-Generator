@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
-const SVG = require("./svg");
-const { Circle, Triangle, Square } = require("./shapes");
+const SVG = require("./lib/svg");
+const { Circle, Triangle, Square } = require("./lib/shapes");
 const { writeFile } = require("fs/promises");
 
 const questions = [
@@ -22,7 +22,7 @@ const questions = [
         name: "shape",
         type: "list",
         message: "Select a shape for your SVG.",
-        choices: ["circle", "square", "triangle"],
+        choices: ["Circle", "Square", "Triangle"],
     },
     {
         name: "shapeColor",
@@ -33,5 +33,23 @@ const questions = [
 
 
 const init = () => {
-
+    inquirer.prompt(questions).then((data) => {
+        let shape;
+        if (data.shape === "Circle") {
+            shape = new Circle();
+        }
+        if (data.shape === "Square") {
+            shape = new Square();
+        }
+        if (data.shape === "Triangle") {
+            shape = new Triangle();
+        }
+        console.log(shape)
+    })
 }
+
+init()
+
+    
+   
+ 

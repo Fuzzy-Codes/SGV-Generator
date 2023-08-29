@@ -44,12 +44,23 @@ const init = () => {
         if (data.shape === "Triangle") {
             shape = new Triangle();
         }
-        console.log(shape)
+        shape.setColor(data.shapeColor);
+
+        const svg = new SVG();
+        svg.setText(data.text, data.textColor);
+        svg.setShape(shape);
+        return writeFile("logo.svg", svg.render());
     })
+    .then(() => {
+        console.log("Generated logo.svg");
+    })
+    .catch((error) => {
+        console.log(error);
+        console.log("Oops! Something went wrong.");
+    });
 }
 
 init()
 
-    
-   
- 
+
+
